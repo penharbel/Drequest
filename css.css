@@ -1,0 +1,187 @@
+/*principais*/
+
+@font-face {
+    font-family: "rpg";
+    src: url(fontes/Krabby\ Patty.ttf);
+}
+@font-face {
+    font-family: "rpg2";
+    src: url(fontes/Sketch\ 3D.woff);
+}
+@font-face {
+    font-family: "rpg3";
+    src: url(fontes/Turtles.otf);
+}
+
+/*objetos*/
+
+body
+{
+    background-color: rgb(53, 53, 50);
+    width: 2000;
+    height: 2000;
+}
+button
+{
+    width: 150px;
+    height: 50px;
+    color: #0C57A1;
+    font-weight: 900;
+    border-radius: 25px;
+    border-style: outset;
+    border-width: 4px;
+    border-color: #02284D;
+    background-color: rgb(19, 18, 18);
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+h1
+{
+font-family: rpg2, rpg, rpg3;
+}
+div
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/*itens*/
+
+#topdiv
+{
+    background-color: rgb(39, 39, 39);
+    margin: -7px;
+    border: 2px solid #C68400;
+    position: fixed;
+    width: 100%;
+    height: 25%;
+}
+#leftdiv
+{
+    background-color: rgb(39, 39, 39);
+    margin: -7px;
+    border: 2px solid #C68400;
+    position: fixed;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#rightdiv
+{
+    background-color: rgb(39, 39, 39);
+    margin: -7px;
+    border: 2px solid #C68400;
+    position: fixed;
+    left: 75%;
+    width: 25%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#mapa
+{
+    width: 3000px;
+    height: 2000px;
+    position: absolute;
+}
+#T_zoom
+{
+    position: relative;
+    top: 13px;
+    margin-right: 50px;
+    background-color: #ebf5ff;
+}
+.Btn_return
+{
+    width: 80px;
+    height: 80px;
+    color: #0C57A1;
+    font-weight: 900;
+    border-radius: 40px;
+    border-style: outset;
+    border-width: 4px;
+    border-color: #02284D;
+    background-color: rgb(19, 18, 18);
+}
+.button_ex1
+{
+    width: 150px;
+    height: 50px;
+    color: #08a162;
+    font-weight: 900;
+    border-radius: 25px;
+    border-style: outset;
+    border-width: 4px;
+    border-color: rgb(100, 138, 13);
+    background-color: rgb(1, 29, 29)3;
+}
+#saidaLbtn
+{
+    width: 50px;
+    height: 100px;
+    background: linear-gradient(270deg, rgba(255, 255, 255, 0) 0%, black 100%);
+    border-radius: 0px;
+    border-width: 0px;
+    position: absolute;
+    top: 400px;
+    left: 277px;
+}
+#objetos_left
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 700px;
+}
+#maps
+{
+    width: 298px;
+    height: 500px;
+    opacity: 0;
+}
+
+#mudar_mapa
+{
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.player
+{
+    width: 150px;
+    height: 150px;
+    top: 500px;
+}
+.input_player
+{
+    position: absolute;
+    opacity: 0;
+    width: 150px;
+    height: 150px;
+}
+.divplayer
+{
+    position: absolute;
+    top: 500px;
+    left: 200px;
+}
+#excluir_player
+{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+#btn_div
+{
+    width: 900px;
+    justify-content: space-evenly;
+}
