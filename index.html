@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="css.css">
+    <script lang="js" src="interações.js" defer></script>
+    <script lang="js" src="responsividade.js" defer></script>
+    <title>D>Request</title>
+</head>
+<body >
+
+    <img style="position: absolute;" id="mapa" src="imagens/neon.hpg.jpg" alt="sdasda">
+    
+
+    <div id="topdiv">
+        <div id="objetos_top">
+            <div style="display: none;" id="perso_div">
+                <button class="Btn_return" id="btn_change">Alterar</button>
+                <textarea style="resize: none; text-align: center; margin: 50px;" name="player tamanho" id="Tamanho_play" cols="30" rows="2"> Tamanho: 150 -> Padrão</textarea>
+                <textarea style="resize: none; text-align: center; margin: 50px;" name="player tamanho" id="id_play" cols="30" rows="2">Numero do perso</textarea>
+                <button class="Btn_return" onclick="opcoestop('perso_div','btn_div')">&lt;</button>
+            </div>
+            <div style="display: none;" id="zoom_div">
+                <textarea style="resize: none; text-align: center;" name="zoom" id="T_zoom" cols="30" rows="2">2000</textarea>
+                <button class="Btn_return" onclick="opcoestop('zoom_div','btn_div')">&lt;</button>
+            </div>
+            <div id="btn_div">
+                <button class="button_ex1" onclick="opcoestop('btn_div', 'zoom_div')">Mapa-Zoom</button>
+                <button class="button_ex1" onclick="opcoestop('btn_div', 'perso_div')">Reajuste no tamanho</button>
+                <button class="button_ex1" id="maps_create">Criação de mapas</button>
+            </div>  
+        </div>
+    </div>
+
+    <div id="leftdiv">
+        <div id="objetos_left">
+            <h1 id="h1_mestre" style="position: relative; top: -110px; color: #df972d;">Opções do <span id="player">mestre</span></h1>
+            <button id="edit_btn1" >Criar personagem</button>
+            <button id="edit_btn2" onclick="opcoestop('objetos_left', 'excluir_player')">Excluir personagem</button>
+            <button id="edit_btn4" onclick="opcoestop('objetos_left', 'mudar_mapa')" >mudar mapa</button>
+            <button id="edit_btn5" style=" border-color: red;">banir player</button>
+        </div>
+        <div id="mudar_mapa">
+            <h1 style="text-align: center;">Clique ou arraste seus arquivos</h1>
+            <input type="file" name="mapas" id="maps">
+            <button class="button_ex1" onclick="opcoestop('mudar_mapa', 'objetos_left')">&lt;</button>
+        </div>
+        <div id="excluir_player">
+            <h1 style="text-align: center;">quem voce deseja excluir?</h1>
+            <textarea style="resize: none;" name="player" id="player_ext" cols="25" rows="1">valor em numeros: 1</textarea>
+            <button class="button_ex1" onclick="opcoestop('excluir_player', 'objetos_left')">&lt;</button>
+        </div>
+    </div>
+
+    <div id="rightdiv">
+        <div id="objetos_right">
+            <img src="imagens/gato gordo.jpg" alt="Big Meow" id="Big_Meow">
+            <textarea id="output_BM" name="output_BM" cols="32" rows="27">Digite: tutorial</textarea>
+            <textarea onkeypress="enterprompt(event)" name="input" id="prompt_BM" cols="30" rows="1"></textarea>
+        </div>
+    </div>
+ 
+</body>
+</html>
