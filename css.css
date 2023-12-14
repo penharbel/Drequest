@@ -201,7 +201,7 @@ div
     border: 0 none;
     outline: 0;
     top: 50%;
-    color: rgb(32, 32, 32);
+    color: rgb(49, 49, 49);
     resize: none;
 }
 #Big_Meow
@@ -225,5 +225,7 @@ div
 {
     position: relative;
     overflow-y: visible;
+    color: rgb(66, 66, 66);
+    background-color: rgb(192, 192, 192);
     top: -5%;
 }
