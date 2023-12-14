@@ -161,7 +161,6 @@ div
 {
     width: 150px;
     height: 150px;
-    top: 500px;
 }
 .input_player
 {
@@ -173,8 +172,8 @@ div
 .divplayer
 {
     position: absolute;
-    top: 500px;
-    left: 400px;
+    top: 50%;
+    left: 50%;
 }
 #excluir_player
 {

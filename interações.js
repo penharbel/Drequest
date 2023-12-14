@@ -278,19 +278,6 @@ function opcoestop(ret,col)
             let valores = valor.split(" ");
             console.log(valores);
 
-            var pesquisaDICE = valores.filter((DADO) =>{
-                if(DADO.search("D") > 0){
-                    return DADO;
-                }
-            });
-            let pesquisaSOMA = valores.filter((DADO) => {
-                if(DADO.search("D") < 0){
-                    return DADO;
-                }
-            })
-            console.log(pesquisaDICE);
-            console.log(pesquisaSOMA);
-
             for(let i = 0; i <= valores.length; i++)
             {
                 if(valores[i] == 'DANO')
@@ -309,6 +296,20 @@ function opcoestop(ret,col)
 
             function Dano()
             {
+
+                var pesquisaDICE = valores.filter((DADO) =>{
+                    if(DADO.search("D") > 0){
+                        return DADO;
+                    }
+                });
+                var pesquisaSOMA = valores.filter((DADO) => {
+                    if(DADO.search("D") < 0){
+                        return DADO;
+                    }
+                })
+                console.log(pesquisaDICE);
+                console.log(pesquisaSOMA);
+
                 let valorSubjacente = "";
                 let valorFinal = 0;
 
@@ -345,6 +346,20 @@ function opcoestop(ret,col)
             }
             function Vantagem()
             {
+
+                var pesquisaDICE = valores.filter((DADO) =>{
+                    if(DADO.search("D") > 0){
+                        return DADO;
+                    }
+                });
+                var pesquisaSOMA = valores.filter((DADO) => {
+                    if(DADO.search("D") < 0){
+                        return DADO;
+                    }
+                })
+                console.log(pesquisaDICE);
+                console.log(pesquisaSOMA);
+
                 let valorSubjacente = "";
                 let valorFinal = 0;
                 let valoresConclusao = new Array();
@@ -393,6 +408,19 @@ function opcoestop(ret,col)
             }
             function Desvantagem()
             {
+
+                var pesquisaDICE = valores.filter((DADO) =>{
+                    if(DADO.search("D") > 0){
+                        return DADO;
+                    }
+                });
+                var pesquisaSOMA = valores.filter((DADO) => {
+                    if(DADO.search("D") < 0){
+                        return DADO;
+                    }
+                })
+                console.log(pesquisaDICE);
+                console.log(pesquisaSOMA);
 
                 let valorSubjacente = "";
                 let valorFinal = 9999999999;
