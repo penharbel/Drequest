@@ -1,12 +1,11 @@
 //variaveis de controle
-var controle = 25;
-var controleTop = 25;
-var controleRight = 25;
-var controleRleft = 75;
+var controle = 35;
+var controleRight = 35;
+var controleRleft = 66;
 var lastscroll = 0;
-var Lx = 0.5;
-var Tx = 0.5;
-var Rx = 0.5;
+var Lx = 1;
+var Tx = 1;
+var Rx = 1;
 var playerid = 1;
 var rotate = new Array(50);
 var tamanho = new Array(50);
@@ -18,26 +17,26 @@ var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por
 //animações
     //div lateral esquerda(animação para retrair e abrir)
         $("#leftdiv").mouseleave(() => {
-            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex"){
+            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex"){
                 return;
             }
             
             function Anim()
             {
-                if(controle < 3)
+                if(controle < 2)
                 {
-                    controle = 4;
+                    controle = 3;
                     return;
                 }
-                if(controle > 25)
+                if(controle > 35)
                 {
-                    controle = 25;
+                    controle = 35;
                     return;
                 }
-                if(controle < 25)
+                if(controle < 35)
                 {
                     document.getElementById("objetos_left").style.display = "none";
-                }else if(controle > 24){
+                }else if(controle > 34){
                     document.getElementById("objetos_left").style.display = "flex";
                 }
                 document.getElementById("leftdiv").style.width = controle + "%";
@@ -47,55 +46,27 @@ var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por
             Lx *= -1;
             Anim();
         });
-    //div superior(animação para retrair e abrir)
-        $("#topdiv").mouseleave(() => { 
-            function Anim()
-            {
-                if(controleTop < 3)
-                {
-                    controleTop = 4;
-                    return;
-                }
-                if(controleTop > 25)
-                {
-                    controleTop = 25;
-                    return;
-                }
-                if(controleTop < 24)
-                {
-                    document.getElementById("objetos_top").style.display = "none";
-                }else if(controleTop > 24){
-                    document.getElementById("objetos_top").style.display = "flex";
-                }
-                document.getElementById("topdiv").style.height = controleTop + "%";
-                controleTop += Tx;
-                requestAnimationFrame(Anim);
-            }
-            Tx *= -1;
-            Anim();
-        });
 
     //div lateral direita(animação para retrair e abrir)
         $("#rightdiv").mouseleave(() => { 
-
             function Anim()
             {
-                if(controleRight < 3)
+                if(controleRight < 2)
                 {
-                    controleRight = 4;
-                    controleRleft = 96;
+                    controleRight = 3;
+                    controleRleft = 98;
                     return;
                 }
-                if(controleRight > 25)
+                if(controleRight > 35)
                 {
-                    controleRight = 25;
-                    controleRleft = 75;
+                    controleRight = 35;
+                    controleRleft = 66;
                     return;
                 }
-                if(controleRight < 24)
+                if(controleRight < 34)
                 {
                     document.getElementById("objetos_right").style.display = "none";
-                }else if(controleRight > 24){
+                }else if(controleRight > 34){
                     document.getElementById("objetos_right").style.display = "flex";
                 }
                 document.getElementById("rightdiv").style.width = controleRight + "%";
@@ -111,13 +82,39 @@ var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por
 //mudança de estado
 function opcoestop(ret,col)
 {
-    document.getElementById(ret).style.display = "none";
-    document.getElementById(col).style.display = "flex";
+    let sumir = document.getElementById(ret).style;
+    let aparecer = document.getElementById(col).style;
+    let controle = 1.0;
+
+    function Anima()
+    {
+        sumir.opacity = controle;
+        if(controle < 0)
+        {
+            sumir.display = "none";
+            Desanima();
+            return;
+        }
+        controle -= 0.1;
+        requestAnimationFrame(Anima);
+    }
+    function Desanima()
+    {
+        aparecer.display = "flex";
+        aparecer.opacity = controle;
+        if(controle > 1)
+        {
+            return;
+        }
+        controle += 0.1;
+        requestAnimationFrame(Desanima);
+    }
+    Anima();
 }
     
 //jquery
     //criação de players
-       $("#edit_btn1").click(function () { 
+       $("#Cria_player").click(function () { 
             let container = document.querySelector("body")
             let divP = document.createElement("div");
             let imgP = document.createElement("img");
