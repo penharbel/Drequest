@@ -184,13 +184,13 @@ function opcoestop(ret,col)
                 if(lastscroll < window.scrollY)
                 {
                     divP.style.rotate = rotate[divP.id] + "deg";  
-                    rotate[divP.id]+= 2;
+                    rotate[divP.id]+= 4;
                     if(rotate[divP.id] > 360){
                         rotate[divP.id] = 0;
                     }
                 }else if (lastscroll > window.scrollY){
                     divP.style.rotate = rotate[divP.id] + "deg";  
-                    rotate[divP.id]-= 2;
+                    rotate[divP.id]-= 4;
                     if(rotate[divP.id] > 360){
                         rotate[divP.id] = 0;
                     }
