@@ -11,17 +11,13 @@ var playerid = 1;
 var rotate = new Array(50);
 var tamanho = new Array(50);
 var proxValue = 0;
-//eventos
-function addEvent()
-{
-    document.getElementById("leftdiv").addEventListener("mouseleave", leftDiv, false);
-    document.getElementById("topdiv").addEventListener("mouseleave", topDiv, false);
-    document.getElementById("rightdiv").addEventListener("mouseleave", rightDiv, false);
-}
+
+//Tutorial BigMeow
+var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por enquanto tem 3 tipos de rolagem de dados: \n \n VANTAGEM: pega o maior valor \n \n DESVANTAGEM: pega o menor valor \n \n DANO: soma todos os valores \n \n -----PROMPT----- \n \n Temos 3 tipos de commandos (DANO, ROLAGEN, SOMA) \n \n DANO: 1d20, 4d12, 510 (não importa os valores se tiver um D no meio) \n \n ROLAGEM: dano, vantagem(vant), desvantagem(desv) \n \n SOMA: +5 +6 +7 \n \n PS: A ORDEM DOS VALORES NÃO ALTERA O RESULTADO, fique tranquilo para escrever {2d30 4d100 +5 +6 dano 2d13 +7} \n \n PS2: Cada commando tem que estar separado por ESPAÇO para serem reconhecidos \n \n PS3: O commando ROLAGENS é OBRIGATORIO!!! \n \n Obrigado, se divirta!!!"
+
 //animações
     //div lateral esquerda(animação para retrair e abrir)
-        function leftDiv()
-        {
+        $("#leftdiv").mouseleave(() => {
             if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex"){
                 return;
             }
@@ -50,10 +46,9 @@ function addEvent()
             }
             Lx *= -1;
             Anim();
-        }
+        });
     //div superior(animação para retrair e abrir)
-        function topDiv()
-        {
+        $("#topdiv").mouseleave(() => { 
             function Anim()
             {
                 if(controleTop < 3)
@@ -78,11 +73,11 @@ function addEvent()
             }
             Tx *= -1;
             Anim();
-        }
+        });
 
     //div lateral direita(animação para retrair e abrir)
-        function rightDiv()
-        {
+        $("#rightdiv").mouseleave(() => { 
+
             function Anim()
             {
                 if(controleRight < 3)
@@ -111,7 +106,7 @@ function addEvent()
             }
             Rx *= -1;
             Anim();
-        }
+        });
 
 //mudança de estado
 function opcoestop(ret,col)
@@ -167,8 +162,6 @@ function opcoestop(ret,col)
             rotate[playerid] = 0;
             tamanho[playerid] = 75;
 
-            
-
         //mudança na imagen dos players
             inputP.addEventListener("change", () => {
                 let leitor = new FileReader();
@@ -191,13 +184,13 @@ function opcoestop(ret,col)
                 if(lastscroll < window.scrollY)
                 {
                     divP.style.rotate = rotate[divP.id] + "deg";  
-                    rotate[divP.id]+= 2;
+                    rotate[divP.id]+= 4;
                     if(rotate[divP.id] > 360){
                         rotate[divP.id] = 0;
                     }
                 }else if (lastscroll > window.scrollY){
                     divP.style.rotate = rotate[divP.id] + "deg";  
-                    rotate[divP.id]-= 2;
+                    rotate[divP.id]-= 4;
                     if(rotate[divP.id] > 360){
                         rotate[divP.id] = 0;
                     }
@@ -266,3 +259,186 @@ function opcoestop(ret,col)
 
     //site para riar mapas2D
         $("#maps_create").click(() => { window.open("https://inkarnate.com/", "_blank") });
+
+    //Sistema de dados
+        $('#output_BM').attr("disabled", true);
+        function enterprompt(eve)
+        {
+            let press = eve.keyCode;
+            if(press == 13)
+            {
+                let prompt = document.getElementById("prompt_BM").value;
+                BigMeow(prompt);
+            }
+        }
+        function BigMeow(prompt)
+        {
+            let valor = prompt.toUpperCase();
+            document.getElementById("output_BM").value = valor;
+            let valores = valor.split(" ");
+            console.log(valores);
+
+            var pesquisaDICE = valores.filter((DADO) =>{
+                if(DADO.search("D") > 0){
+                    return DADO;
+                }
+            });
+            let pesquisaSOMA = valores.filter((DADO) => {
+                if(DADO.search("D") < 0){
+                    return DADO;
+                }
+            })
+            console.log(pesquisaDICE);
+            console.log(pesquisaSOMA);
+
+            for(let i = 0; i <= valores.length; i++)
+            {
+                if(valores[i] == 'DANO')
+                {
+                    Dano();
+                    return;
+                }else if(valores[i] == "VANTAGEM" || valores[i] == "VAMTAGEM" || valores[i] == "VANT" || valores[i] == "VAMT"){
+                    Vantagem();
+                    return;
+                }else if(valores[i] == "DESVANTAGEM" || valores[i] == "DESVAMTAGEM" || valores[i] == "DESV"){
+                    Desvantagem();
+                }else if(valores[i] == "TUTORIAL"){
+                    document.getElementById("output_BM").value = TutorialBM;
+                }
+            }
+
+            function Dano()
+            {
+                let valorSubjacente = "";
+                let valorFinal = 0;
+
+                for(let i = 0; i < pesquisaDICE.length; i++)
+                {
+                    let separador = pesquisaDICE[i].split('D');
+                    let controlador = parseInt(separador[0]);
+                    let dado = parseInt(separador[1]);
+                    for(let i = 0; i <= controlador; i++)
+                    {
+                        let dice = Math.floor(Math.random() * dado);
+                        valorFinal += dice;
+                        valorSubjacente += ("\n dice: " + dice + " \n ") ;
+                    }
+                }
+
+                for(let i = 0; i < pesquisaSOMA.length; i++)
+                {
+                    if(pesquisaSOMA[i] == "VANTAGEM" || pesquisaSOMA[i] == "VAMTAGEM" || pesquisaSOMA[i] == "VANT" || pesquisaSOMA[i] == "VAMT")
+                    {
+
+                    }else{
+                        let valor = pesquisaSOMA[i].substring(1);
+                        let Valor = parseInt(valor);
+                        console.log(valor);
+                        console.log(Valor);
+                        valorFinal += Valor;
+                    }
+                }
+                
+                document.getElementById("output_BM").value += valorSubjacente;
+                document.getElementById("output_BM").value += ("\n Valor Final: " + valorFinal);
+                document.getElementById("prompt_BM").value = "";
+            }
+            function Vantagem()
+            {
+                let valorSubjacente = "";
+                let valorFinal = 0;
+                let valoresConclusao = new Array();
+                let controlE = 0;
+                
+
+                for(let i = 0; i < pesquisaDICE.length; i++)
+                {
+                    let separador = pesquisaDICE[i].split('D');
+                    console.log(separador);
+                    let controlador = parseInt(separador[0]);
+                    let dado = parseInt(separador[1]);
+                    for(let e = 0; e < controlador; e++)
+                    {
+                        let dice = Math.floor(Math.random() * dado);
+                        valorSubjacente += ("\n dice: " + dice + " \n ") ;
+                        valoresConclusao[controlE] = dice;
+                        controlE++;
+                    }
+                }
+                for(let i = 0; i <= valoresConclusao.length; i++)
+                {
+                    if(valorFinal < valoresConclusao[i])
+                    {
+                        valorFinal = valoresConclusao[i];
+                    }
+                }
+
+                for(let i = 0; i < pesquisaSOMA.length; i++)
+                {
+                    if(pesquisaSOMA[i] == "VANTAGEM" || pesquisaSOMA[i] == "VAMTAGEM" || pesquisaSOMA[i] == "VANT" || pesquisaSOMA[i] == "VAMT")
+                    {
+
+                    }else{
+                        let valor = pesquisaSOMA[i].substring(1);
+                        let Valor = parseInt(valor);
+                        console.log(valor);
+                        console.log(Valor);
+                        valorFinal += Valor;
+                    }
+                }
+
+                document.getElementById("output_BM").value += valorSubjacente;
+                document.getElementById("output_BM").value += ("\n Valor Final: " + valorFinal);
+                document.getElementById("prompt_BM").value = "";
+            }
+            function Desvantagem()
+            {
+
+                let valorSubjacente = "";
+                let valorFinal = 9999999999;
+                let valoresConclusao = new Array();
+                let controlE = 0;
+                
+
+                for(let i = 0; i < pesquisaDICE.length; i++)
+                {
+                    let separador = pesquisaDICE[i].split('D');
+                    console.log(separador);
+                    let controlador = parseInt(separador[0]);
+                    let dado = parseInt(separador[1]);
+                    for(let e = 0; e < controlador; e++)
+                    {
+                        let dice = Math.floor(Math.random() * dado);
+                        valorSubjacente += ("\n dice: " + dice + " \n ") ;
+                        valoresConclusao[controlE] = dice;
+                        controlE++;
+                    }
+                }
+                for(let i = 0; i <= valoresConclusao.length; i++)
+                {
+                    if(valorFinal > valoresConclusao[i])
+                    {
+                        valorFinal = valoresConclusao[i];
+                    }
+                }
+
+                for(let i = 0; i < pesquisaSOMA.length; i++)
+                {
+                    if(pesquisaSOMA[i] == "DESVANTAGEM" || pesquisaSOMA[i] == "DESVAMTAGEM" || pesquisaSOMA[i] == "DESV")
+                    {
+
+                    }else{
+                        let valor = pesquisaSOMA[i].substring(1);
+                        let Valor = parseInt(valor);
+                        console.log(valor);
+                        console.log(Valor);
+                        valorFinal += Valor;
+                    }
+                }
+
+                document.getElementById("output_BM").value += valorSubjacente;
+                document.getElementById("output_BM").value += ("\n Valor Final: " + valorFinal);
+                document.getElementById("prompt_BM").value = "";
+            }
+        }
+        

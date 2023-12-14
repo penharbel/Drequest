@@ -9,7 +9,7 @@
     <script lang="js" src="responsividade.js" defer></script>
     <title>D>Request</title>
 </head>
-<body onload="addEvent()">
+<body >
 
     <img style="position: absolute;" id="mapa" src="imagens/neon.hpg.jpg" alt="sdasda">
     
@@ -28,7 +28,7 @@
             </div>
             <div id="btn_div">
                 <button class="button_ex1" onclick="opcoestop('btn_div', 'zoom_div')">Mapa-Zoom</button>
-                <button class="button_ex1" onclick="opcoestop('btn_div', 'perso_div')">Tamanho dos personagens</button>
+                <button class="button_ex1" onclick="opcoestop('btn_div', 'perso_div')">Reajuste no tamanho</button>
                 <button class="button_ex1" id="maps_create">Criação de mapas</button>
             </div>  
         </div>
@@ -36,7 +36,7 @@
 
     <div id="leftdiv">
         <div id="objetos_left">
-            <h1 id="h1_mestre" style="position: relative; top: -180px; color: #579fe7; text-decoration: overline;">Opções do <span id="player">mestre</span></h1>
+            <h1 id="h1_mestre" style="position: relative; top: -110px; color: #df972d;">Opções do <span id="player">mestre</span></h1>
             <button id="edit_btn1" >Criar personagem</button>
             <button id="edit_btn2" onclick="opcoestop('objetos_left', 'excluir_player')">Excluir personagem</button>
             <button id="edit_btn4" onclick="opcoestop('objetos_left', 'mudar_mapa')" >mudar mapa</button>
@@ -56,7 +56,9 @@
 
     <div id="rightdiv">
         <div id="objetos_right">
-            <h1>Gameplay</h1>
+            <img src="imagens/gato gordo.jpg" alt="Big Meow" id="Big_Meow">
+            <textarea id="output_BM" name="output_BM" cols="32" rows="27">Digite: tutorial</textarea>
+            <textarea onkeypress="enterprompt(event)" name="input" id="prompt_BM" cols="30" rows="1"></textarea>
         </div>
     </div>
  
