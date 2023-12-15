@@ -1,29 +1,22 @@
 /*principais*/
 
 @font-face {
-    font-family: "rpg";
-    src: url(fontes/Krabby\ Patty.ttf);
-}
-@font-face {
-    font-family: "rpg2";
-    src: url(fontes/Sketch\ 3D.woff);
-}
-@font-face {
-    font-family: "rpg3";
-    src: url(fontes/Turtles.otf);
-}
-@font-face {
     font-family: "front";
     src: url(fontes/i_fink_u_freeky.ttf);
 }
+@font-face {
+    font-family: "monofonto";
+    src: url(fontes/monofonto_rg.otf);
+}
+
 
 /*tags*/
 
 body
 {
     background-color: rgb(53, 53, 50);
-    width: 2000;
-    height: 2000;
+    width: 1500;
+    height: 1500;
 }
 button
 {
@@ -139,10 +132,24 @@ textarea
     flex-direction: column;
     z-index: 10;
 }
+#ficha_div
+{
+    width: 30%;
+    height: 30%;
+    background: linear-gradient(180deg, rgb(59, 59, 59) 0%, black 110%);
+    position: fixed;
+    top: 10%;
+    left: 60%;
+    border: 1px solid rgb(0, 26, 0);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+}
 #mapa
 {
-    width: 3000px;
-    height: 2000px;
+    width: 1500px;
+    height: 1000px;
     position: absolute;
 }
 #T_zoom
@@ -259,4 +266,28 @@ textarea
     outline: 0;
     text-align: center;
     color: rgb(126, 126, 126);
+}
+#imagen_ficha
+{
+    width: 125px; 
+    height: 125px; 
+    opacity: 0.9;
+    margin-left: 10px;
+    margin-right: 11px;
+}
+#nome_ficha
+{
+    margin-left: 25px;
+    font-weight: 100;
+    color: rgb(193, 204, 197);
+}
+#lore_ficha
+{
+    font-family: monofonto, Arial;
+    color: rgb(70, 73, 71);
+    margin-left: 10px;
+}
+#status_ficha2
+{
+    margin-left: 100px;
 }

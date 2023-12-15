@@ -9,6 +9,8 @@ var Rx = 1;
 var playerid = 1;
 var rotate = new Array(50);
 var tamanho = new Array(50);
+var fichas = new Array();
+var Imagens = new Array();
 var proxValue = 0;
 
 //Tutorial BigMeow
@@ -114,7 +116,15 @@ function opcoestop(ret,col)
     
 //jquery
     //criação de players
-       $("#Cria_player").click(function () { 
+       $("#Cria_player").click(function () {
+
+        //setando o prompt
+            let name = document.getElementById("Name_player").value;
+            let ficha = document.getElementById("ficha_player").value;
+            let valores = ficha.split("\n")
+            console.log(valores);
+
+        //criando o player
             let container = document.querySelector("body")
             let divP = document.createElement("div");
             let imgP = document.createElement("img");
@@ -159,49 +169,143 @@ function opcoestop(ret,col)
             rotate[playerid] = 0;
             tamanho[playerid] = 75;
 
-        //mudança na imagen dos players
-            inputP.addEventListener("change", () => {
-                let leitor = new FileReader();
+            //Setando as fichas e imagens (objetos)
+                fichas[divP.id] = {
+                    nome: name,
+                    ficha: ficha,
+                };
+                Imagens[divP.id] = {
+                    img1: "imagens/vacalo_xadres.png",
+                    img2: "imagens/vacalo_xadres.png",
+                    img3: "imagens/vacalo_xadres.png",
+                    img4: "imagens/vacalo_xadres.png",
+                    img5: "imagens/vacalo_xadres.png",
+                    img6: "imagens/vacalo_xadres.png",
+                    control: 1,
+                };
 
-                leitor.addEventListener("load", ()=>{
-                    imgP.src = leitor.result;
-                });
 
-                leitor.readAsDataURL(inputP.files[0]);
-            },false)
+            //mudança na imagen dos players
+                inputP.addEventListener("change", () => {
+                    let leitor = new FileReader();
 
-        //mudança na posição dos players
-            divP.addEventListener("dragend", () => {
-                divP.style.left = event.pageX - tamanho[divP.id] + "px";
-                divP.style.top = event.pageY - tamanho[divP.id] + "px";
-            },false);
+                    leitor.addEventListener("load", ()=>{
+                        Imagens[divP.id].control += 1;
+                        if(Imagens[divP.id].control == 1){
+                            Imagens[divP.id].img1 = leitor.result;
+                        }else if(Imagens[divP.id].control == 2){
+                            Imagens[divP.id].img2 = leitor.result;
+                        }else if(Imagens[divP.id].control == 3){
+                            Imagens[divP.id].img3 = leitor.result;
+                        }else if(Imagens[divP.id].control == 4){
+                            Imagens[divP.id].img4 = leitor.result;
+                        }else if(Imagens[divP.id].control == 5){
+                            Imagens[divP.id].img5 = leitor.result;
+                        }else if(Imagens[divP.id].control == 6){
+                            Imagens[divP.id].img6 = leitor.result;
+                        }
+                        imgP.src = leitor.result;
+                    });
+
+                    leitor.readAsDataURL(inputP.files[0]);
+                },false)
+
+            //mudança na posição dos players
+                divP.addEventListener("dragend", () => {
+                    divP.style.left = event.pageX - tamanho[divP.id] + "px";
+                    divP.style.top = event.pageY - tamanho[divP.id] + "px";
+                },false);
         
-        //Rotação dos players   
-            function rotatingplayer(){
-                if(lastscroll < window.scrollY)
-                {
-                    divP.style.rotate = rotate[divP.id] + "deg";  
-                    rotate[divP.id]+= 4;
-                    if(rotate[divP.id] > 360){
-                        rotate[divP.id] = 0;
+            //Rotação dos players  e mudança de imagens  
+                function rotatingplayer(){
+                    if(lastscroll < window.scrollY)
+                    {
+                        divP.style.rotate = rotate[divP.id] + "deg";  
+                        rotate[divP.id]+= 4;
+                        if(rotate[divP.id] > 360){
+                            rotate[divP.id] = 0;
+                        }
+                    }else if (lastscroll > window.scrollY){
+                        divP.style.rotate = rotate[divP.id] + "deg";  
+                        rotate[divP.id]-= 4;
+                        if(rotate[divP.id] > 360){
+                            rotate[divP.id] = 0;
+                        }
                     }
-                }else if (lastscroll > window.scrollY){
-                    divP.style.rotate = rotate[divP.id] + "deg";  
-                    rotate[divP.id]-= 4;
-                    if(rotate[divP.id] > 360){
-                        rotate[divP.id] = 0;
+                    window.scroll(window.scrollX, lastscroll);
+                }
+                function UpImage()
+                {
+                    Imagens[divP.id].control +=1;
+                    if(Imagens[divP.id].control == 1){
+                        imgP.src = Imagens[divP.id].img1;
+                    }else if(Imagens[divP.id].control == 2){
+                        imgP.src = Imagens[divP.id].img2;
+                    }else if(Imagens[divP.id].control == 3){
+                        imgP.src = Imagens[divP.id].img3;
+                    }else if(Imagens[divP.id].control == 4){
+                        imgP.src = Imagens[divP.id].img4;
+                    }else if(Imagens[divP.id].control == 5){
+                        imgP.src = Imagens[divP.id].img5;
+                    }else if(Imagens[divP.id].control == 6){
+                        imgP.src = Imagens[divP.id].img6;
+                    }
+                    if(Imagens[divP.id].control > 6)
+                    {
+                        Imagens[divP.id].control = 1;
+                        imgP.src = Imagens[divP.id].img1;
+                    }
+                    window.scroll(window.scrollX, lastscroll);
+                }
+                function DownImage()
+                {
+                    Imagens[divP.id].control -=1;
+                    if(Imagens[divP.id].control == 1){
+                        imgP.src = Imagens[divP.id].img1;
+                    }else if(Imagens[divP.id].control == 2){
+                        imgP.src = Imagens[divP.id].img2;
+                    }else if(Imagens[divP.id].control == 3){
+                        imgP.src = Imagens[divP.id].img3;
+                    }else if(Imagens[divP.id].control == 4){
+                        imgP.src = Imagens[divP.id].img4;
+                    }else if(Imagens[divP.id].control == 5){
+                        imgP.src = Imagens[divP.id].img5;
+                    }else if(Imagens[divP.id].control == 6){
+                        imgP.src = Imagens[divP.id].img6;
+                    }
+                    if(Imagens[divP.id].control < 1)
+                    {
+                        Imagens[divP.id].control = 6;
+                        imgP.src = Imagens[divP.id].img6;
+                    }
+                    window.scroll(window.scrollX, lastscroll);
+                }
+                function making(e)
+                {
+                    console.log(e.keyCode)
+                    if(e.keyCode == 45 || e.keyCode == 50)
+                    {
+                        UpImage();
+                    }else if(e.keyCode == 43 || e.keyCode == 56){
+                        DownImage();
                     }
                 }
-                window.scroll(window.scrollX, lastscroll);
-            } 
 
-            $("#" + divP.id).hover(() => {
-                lastscroll = window.scrollY;
-                window.addEventListener("scroll", rotatingplayer, false);
-            }, () => {
-                window.removeEventListener("scroll", rotatingplayer, false);
-                window.scroll(window.scrollX, lastscroll);
-            });
+                $("#" + divP.id).hover(() => {
+                    lastscroll = window.scrollY;
+                    window.addEventListener("scroll", rotatingplayer, false);
+                    window.addEventListener("keypress", making, false)
+                }, () => {
+                    window.removeEventListener("scroll", rotatingplayer, false);
+                    window.removeEventListener("keypress", making, false);
+                    window.scroll(window.scrollX, lastscroll);
+                });
+
+            //segurando a imagem
+                divP.addEventListener("drag", (e) => {
+                    divP.style.left = e.pageX - tamanho[divP.id] + "px";
+                    divP.style.top = e.pageY - tamanho[divP.id] + "px";
+                }, false)
                 
                 
             if(proxValue == 0)
