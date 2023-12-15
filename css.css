@@ -36,6 +36,7 @@ h1
 {
     font-family: front, Arial;
     font-weight: 300;
+    color: #cccccc;
 }
 h3
 {
@@ -140,7 +141,7 @@ textarea
 #ficha_div
 {
     width: 30%;
-    height: 30%;
+    height: 80%;
     background: linear-gradient(180deg, rgb(59, 59, 59) 0%, black 110%);
     position: fixed;
     top: 10%;
@@ -148,8 +149,9 @@ textarea
     border: 1px solid rgb(0, 26, 0);
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-direction: column;
+    z-index: 11;
 }
 #mapa
 {
@@ -274,26 +276,38 @@ textarea
 }
 #imagen_ficha
 {
-    width: 125px; 
-    height: 125px; 
+    width: 200px; 
+    height: 200px; 
     opacity: 0.9;
-    margin-left: 10px;
-    margin-right: 11px;
+    position: relative;
+    top: -20%;
 }
 #nome_ficha
 {
-    margin-left: 25px;
     font-weight: 100;
     color: rgb(193, 204, 197);
+    position: relative;
+    top: -20%;
 }
 #lore_ficha
 {
     font-family: monofonto, Arial;
     color: rgb(70, 73, 71);
-    position: absolute;
-    left: 10px;
+    position: relative;
+    margin: 0px;
 }
-#status_ficha2
+#id_play
 {
-    margin-left: 50px;
+    background: linear-gradient(135deg, white 0%, black 300%);
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+    text-align: center;
+    color: rgb(83, 83, 83);
+}
+#status_ficha
+{
+    position: relative;
+    top: -25%;
+    text-align: center;
 }

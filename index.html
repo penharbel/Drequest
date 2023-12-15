@@ -28,7 +28,7 @@
             <h3>Nome</h3>
             <textarea name="nome" id="Name_player" cols="30" rows="1" ></textarea>
             <h3>Ficha</h3>
-            <textarea name="nome" id="ficha_player" cols="38" rows="40" > Exemplo &#10; vida:78 &#10; Stamina:34 &#10; lore:jax é um mecânico extremamente habilidoso e a pesar dos pesares segue com seus cosplays incríveis</textarea>
+            <textarea name="nome" id="ficha_player" cols="38" rows="40" > Exemplo &#10; vida:78 Stamina:34 &#10; Intelecto:0 força:5 &#10; destreza:0 &#10; foco:0 &#10; lore:jax é um mecânico extremamente habilidoso e a pesar dos pesares segue com seus cosplays incríveis</textarea>
             <button class="button_ex1" onclick="opcoestop('criar_player', 'objetos_left')" id="Cria_player">&lt;</button>
         </div>
         <div id="mudar_mapa">
@@ -42,10 +42,9 @@
             <button class="button_ex1" onclick="opcoestop('excluir_player', 'objetos_left')">&lt;</button>
         </div>
         <div style="display: none;" id="perso_div">
-            <button class="Btn_return" id="btn_change">Alterar</button>
-            <textarea style="resize: none; text-align: center; margin: 50px;" name="player tamanho" id="Tamanho_play" cols="30" rows="2"> Tamanho: 150 -> Padrão</textarea>
-            <textarea style="resize: none; text-align: center; margin: 50px;" name="player tamanho" id="id_play" cols="30" rows="2">Numero do perso</textarea>
-            <button class="Btn_return" onclick="opcoestop('perso_div','objetos_left')">&lt;</button>
+            <h1>Altere sua ficha</h1>
+            <textarea name="player tamanho" id="id_play" cols="40" rows="35"></textarea>
+            <button class="button_ex1" onclick="opcoestop('perso_div','objetos_left')">&lt;</button>
         </div>
         <div style="display: none;" id="zoom_div">
             <textarea style="resize: none; text-align: center;" name="zoom" id="T_zoom" cols="30" rows="2">2000</textarea>
@@ -64,15 +63,13 @@
     </div>
 
     <div id="ficha_div" style="display: none;">
-        <div>
+        <div style="display: flex; flex-direction: column;">
             <img src="imagens/rei_veio.jpg" alt="" id="imagen_ficha">
+            <h1 id="nome_ficha">Jorge</h1>
             <p id="status_ficha" class="paragrafo_ficha"></p>
         </div>
-        <div>
-            <h1 id="nome_ficha">Jorge</h1>
-        </div>
-        <div>
-            <p></p>
+        <div style="position: absolute; display: flex; flex-direction: column; top: 65%;">
+            <h1>Lore</h1>
             <p id="lore_ficha">odoiadjoiasdjaoijdaowidiwaj</p>
         </div>
     </div>

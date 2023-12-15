@@ -19,7 +19,7 @@ var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por
 //animações
     //div lateral esquerda(animação para retrair e abrir)
         $("#leftdiv").mouseleave(() => {
-            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex"){
+            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex" || document.getElementById("perso_div").style.display == "flex"){
                 return;
             }
             
@@ -179,7 +179,7 @@ function opcoestop(ret,col)
                     img4: "imagens/vacalo_xadres.png",
                     img5: "imagens/vacalo_xadres.png",
                     img6: "imagens/vacalo_xadres.png",
-                    control: 0,
+                    control: 1,
                 };
 
 
@@ -188,7 +188,6 @@ function opcoestop(ret,col)
                     let leitor = new FileReader();
 
                     leitor.addEventListener("load", ()=>{
-                        Imagens[divP.id].control += 1;
                         if(Imagens[divP.id].control == 1){
                             Imagens[divP.id].img1 = leitor.result;
                         }else if(Imagens[divP.id].control == 2){
@@ -304,7 +303,6 @@ function opcoestop(ret,col)
                     nameF.innerHTML = fichas[divP.id].nome;
 
                     let val = fichas[divP.id].ficha.split("\n");
-                    console.log(val);
                     val.forEach(Ele => {
                         if(Ele.search("lore:") < 0)
                         {
@@ -335,10 +333,19 @@ function opcoestop(ret,col)
 
                 }
 
+
+                function FichaChange(e)
+                {
+                    let ficha = document.getElementById("id_play");
+                    ficha.value = ("Nome:" + fichas[divP.id].nome + "\n" + fichas[divP.id].ficha);
+                }
+
+
                 $("#" + divP.id).hover(() => {
                     lastscroll = window.scrollY;
                     window.addEventListener("scroll", rotatingplayer, false);
                     window.addEventListener("keypress", making, false)
+                    FichaChange();
                     FichaOpen();
                 }, () => {
                     window.removeEventListener("scroll", rotatingplayer, false);
@@ -616,4 +623,23 @@ function opcoestop(ret,col)
                 document.getElementById("prompt_BM").value = "";
             }
         }
+        $("#id_play").change(() => {
+            let valores = document.getElementById("id_play");
+            let array = valores.value.split("\n");
+            let nome = array[0].split(":");
+            console.log(nome);
+            console.log(array);
+            fichas.forEach(Elemento => {
+                if(Elemento.nome == nome[1])
+                {
+                    Elemento.ficha = "";
+                    array.forEach(element => {
+                        if(element.search("Nome:") < 0)
+                        {
+                            Elemento.ficha += (element + "\n"); 
+                        }
+                    });
+                }
+            });
+        });
         
