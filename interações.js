@@ -121,8 +121,6 @@ function opcoestop(ret,col)
         //setando o prompt
             let name = document.getElementById("Name_player").value;
             let ficha = document.getElementById("ficha_player").value;
-            let valores = ficha.split("\n")
-            console.log(valores);
 
         //criando o player
             let container = document.querySelector("body")
@@ -303,30 +301,19 @@ function opcoestop(ret,col)
 
                     statF.height = 125 + "px";
                     containerF.display = "flex";
-                    nameF.innerHTML = name;
+                    nameF.innerHTML = fichas[divP.id].nome;
 
-                    let lore = valores.filter((VALOR) => { 
-                        if(VALOR.search("lore") > -1)
-                        {
-                            return VALOR;
-                        }
-                    })
-                    let val = valores.filter((VALOR) => { 
-                        if(VALOR.search("lore:") < 0)
-                        {
-                            return VALOR;
-                        }
-                    })
+                    let val = fichas[divP.id].ficha.split("\n");
+                    console.log(val);
                     val.forEach(Ele => {
-                        if(control <= 5)
+                        if(Ele.search("lore:") < 0)
                         {
-                            statF.innerHTML += (Ele + "<br>")
+                            statF.innerHTML += (Ele + "<br>");
+                        }else{
+                            loreF.innerHTML = Ele;
                         }
                     });
 
-                    loreF.innerHTML = lore;
-                    console.log(val);
-                    console.log(lore);
                     imgF.src = Imagens[divP.id].img1;
                     control = 0;
                 }
