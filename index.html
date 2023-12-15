@@ -28,12 +28,7 @@
             <h3>Nome</h3>
             <textarea name="nome" id="Name_player" cols="30" rows="1" ></textarea>
             <h3>Ficha</h3>
-            <textarea name="nome" id="ficha_player" cols="38" rows="40" >
-Exemplo
-vida:78
-Stamina:34 
-lore:jax é um mecânico extremamente habilidoso e a pesar dos pesares segue com seus cosplays incríveis
-            </textarea>
+            <textarea name="nome" id="ficha_player" cols="38" rows="40" > Exemplo &#10; vida:78 &#10; Stamina:34 &#10; lore:jax é um mecânico extremamente habilidoso e a pesar dos pesares segue com seus cosplays incríveis</textarea>
             <button class="button_ex1" onclick="opcoestop('criar_player', 'objetos_left')" id="Cria_player">&lt;</button>
         </div>
         <div id="mudar_mapa">
@@ -68,16 +63,16 @@ lore:jax é um mecânico extremamente habilidoso e a pesar dos pesares segue com
         </div>
     </div>
 
-    <div id="ficha_div">
+    <div id="ficha_div" style="display: none;">
         <div>
             <img src="imagens/rei_veio.jpg" alt="" id="imagen_ficha">
-            <p id="status_ficha">aaa</p>
-            <p id="status_ficha2">aaa</p>
+            <p id="status_ficha" class="paragrafo_ficha"></p>
         </div>
         <div>
             <h1 id="nome_ficha">Jorge</h1>
         </div>
         <div>
+            <p></p>
             <p id="lore_ficha">odoiadjoiasdjaoijdaowidiwaj</p>
         </div>
     </div>

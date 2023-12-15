@@ -181,7 +181,7 @@ function opcoestop(ret,col)
                     img4: "imagens/vacalo_xadres.png",
                     img5: "imagens/vacalo_xadres.png",
                     img6: "imagens/vacalo_xadres.png",
-                    control: 1,
+                    control: 0,
                 };
 
 
@@ -291,13 +291,72 @@ function opcoestop(ret,col)
                     }
                 }
 
+            //Config da Ficha    
+                function FichaOpen()
+                {
+                    let control = 0;
+                    let containerF = document.getElementById("ficha_div").style;
+                    let imgF = document.getElementById("imagen_ficha");
+                    let statF = document.getElementById("status_ficha");
+                    let nameF = document.getElementById("nome_ficha");
+                    let loreF = document.getElementById("lore_ficha");
+
+                    statF.height = 125 + "px";
+                    containerF.display = "flex";
+                    nameF.innerHTML = name;
+
+                    let lore = valores.filter((VALOR) => { 
+                        if(VALOR.search("lore") > -1)
+                        {
+                            return VALOR;
+                        }
+                    })
+                    let val = valores.filter((VALOR) => { 
+                        if(VALOR.search("lore:") < 0)
+                        {
+                            return VALOR;
+                        }
+                    })
+                    val.forEach(Ele => {
+                        if(control <= 5)
+                        {
+                            statF.innerHTML += (Ele + "<br>")
+                        }
+                    });
+
+                    loreF.innerHTML = lore;
+                    console.log(val);
+                    console.log(lore);
+                    imgF.src = Imagens[divP.id].img1;
+                    control = 0;
+                }
+                
+                function FichaClose()
+                {
+
+                    let containerF = document.getElementById("ficha_div").style;
+                    let imgF = document.getElementById("imagen_ficha");
+                    let statF = document.getElementById("status_ficha");
+                    let nameF = document.getElementById("nome_ficha");
+                    let loreF = document.getElementById("lore_ficha");
+
+                    containerF.display = "none";
+                    statF.innerHTML = "";
+                    nameF.innerHTML = "";
+                    loreF.innerHTML = "";
+                    imgF.src = ""; 
+
+                }
+
                 $("#" + divP.id).hover(() => {
                     lastscroll = window.scrollY;
                     window.addEventListener("scroll", rotatingplayer, false);
                     window.addEventListener("keypress", making, false)
+                    FichaOpen();
                 }, () => {
                     window.removeEventListener("scroll", rotatingplayer, false);
                     window.removeEventListener("keypress", making, false);
+                    FichaClose();
                     window.scroll(window.scrollX, lastscroll);
                 });
 

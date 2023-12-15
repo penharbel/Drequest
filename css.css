@@ -100,6 +100,11 @@ textarea
     width: 150px;
     height: 150px;
 }
+.paragrafo_ficha
+{
+    color: rgb(123, 131, 126);
+    font-family: monofonto, Arial;
+}
 
 /*itens*/
 
@@ -285,9 +290,10 @@ textarea
 {
     font-family: monofonto, Arial;
     color: rgb(70, 73, 71);
-    margin-left: 10px;
+    position: absolute;
+    left: 10px;
 }
 #status_ficha2
 {
-    margin-left: 100px;
+    margin-left: 50px;
 }
