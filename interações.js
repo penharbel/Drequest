@@ -19,7 +19,7 @@ var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por
 //animações
     //div lateral esquerda(animação para retrair e abrir)
         $("#leftdiv").mouseleave(() => {
-            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex" || document.getElementById("perso_div").style.display == "flex" || document.getElementById("zoom_div").style.display == "flex"){
+            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex" || document.getElementById("perso_div").style.display == "flex" || document.getElementById("zoom_div").style.display == "flex" || document.getElementById("criar_player").style.display == "flex"){
                 return;
             }
             
@@ -165,7 +165,7 @@ function opcoestop(ret,col)
             container.appendChild(divP);
 
             rotate[playerid] = 0;
-            tamanho[playerid] = 75;
+            tamanho[playerid] = 150;
 
             //Setando as fichas e imagens (objetos)
                 fichas[divP.id] = {
@@ -277,14 +277,32 @@ function opcoestop(ret,col)
                     }
                     window.scroll(window.scrollX, lastscroll);
                 }
+                function AumentoPlayer()
+                {
+                    document.getElementById(imgP.id).style.width = tamanho[divP.id] + "px";
+                    document.getElementById(divP.id).style.width = tamanho[divP.id] + "px";
+                    document.getElementById(inputP.id).style.width = tamanho[divP.id] + "px";
+                    document.getElementById(imgP.id).style.height = tamanho[divP.id] + "px";
+                    document.getElementById(divP.id).style.height = tamanho[divP.id] + "px";
+                    document.getElementById(inputP.id).style.height = tamanho[divP.id] + "px";
+                }
+
                 function making(e)
                 {
                     console.log(e.keyCode)
-                    if(e.keyCode == 45 || e.keyCode == 50)
+                    if(e.keyCode == 45)
                     {
                         UpImage();
-                    }else if(e.keyCode == 43 || e.keyCode == 56){
+                    }else if(e.keyCode == 43){
                         DownImage();
+                    }
+                    if(e.keyCode == 56)
+                    {
+                        tamanho[divP.id] += 5;
+                        AumentoPlayer();
+                    }else if(e.keyCode == 50){
+                        tamanho[divP.id] -= 5;
+                        AumentoPlayer();
                     }
                 }
 
