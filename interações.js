@@ -209,8 +209,8 @@ function opcoestop(ret,col)
 
             //mudança na posição dos players
                 divP.addEventListener("dragend", () => {
-                    divP.style.left = event.pageX - tamanho[divP.id] + "px";
-                    divP.style.top = event.pageY - tamanho[divP.id] + "px";
+                    divP.style.left = event.pageX - (tamanho[divP.id] / 2) + "px";
+                    divP.style.top = event.pageY - (tamanho[divP.id] / 2) + "px";
                 },false);
         
             //Rotação dos players  e mudança de imagens  
@@ -374,8 +374,8 @@ function opcoestop(ret,col)
 
             //segurando a imagem
                 divP.addEventListener("drag", (e) => {
-                    divP.style.left = e.pageX - tamanho[divP.id] + "px";
-                    divP.style.top = e.pageY - tamanho[divP.id] + "px";
+                    divP.style.left = e.pageX - (tamanho[divP.id] / 2) + "px";
+                    divP.style.top = e.pageY - (tamanho[divP.id] / 2) + "px";
                 }, false)
                 
                 
