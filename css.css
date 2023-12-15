@@ -273,20 +273,22 @@ textarea
 }
 #imagen_ficha
 {
-    width: 200px; 
-    height: 200px; 
+    width: 55%; 
+    height: 45%; 
     opacity: 0.9;
+    position: static;
+    margin-top: 9%;
 }
 #nome_ficha
 {
     font-weight: 100;
     color: rgb(193, 204, 197);
+    margin: 0px;
 }
 #lore_ficha
 {
     font-family: monofonto, Arial;
     color: rgb(70, 73, 71);
-    position: relative;
     margin: 0px;
     text-align: center;
 }
@@ -302,4 +304,5 @@ textarea
 #status_ficha
 {
     text-align: center;
+    margin: 0px;
 }
