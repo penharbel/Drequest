@@ -19,7 +19,7 @@ var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por
 //animações
     //div lateral esquerda(animação para retrair e abrir)
         $("#leftdiv").mouseleave(() => {
-            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex" || document.getElementById("perso_div").style.display == "flex"){
+            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex" || document.getElementById("perso_div").style.display == "flex" || document.getElementById("zoom_div").style.display == "flex"){
                 return;
             }
             
