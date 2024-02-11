@@ -2,7 +2,7 @@
 
 @font-face {
     font-family: "front";
-    src: url(fontes/i_fink_u_freeky.ttf);
+    src: url(fontes/Long_Shot.ttf);
 }
 @font-face {
     font-family: "monofonto";
@@ -17,6 +17,7 @@ body
     background-color: rgb(53, 53, 50);
     width: 1500;
     height: 1500;
+
 }
 button
 {
@@ -35,8 +36,9 @@ button
 h1
 {
     font-family: front, Arial;
+    font-size: 40px;
     font-weight: 300;
-    color: #cccccc;
+    color: #000000;
 }
 h3
 {
@@ -92,12 +94,12 @@ textarea
     border-style: outset;
     border: 0px;
     border-color: rgb(100, 138, 13);
-    background-color: rgb(1, 29, 29)3;
+    background-color: rgba(1, 29, 29, 0.144);
 }
 .player
 {
-    width: 150px;
-    height: 150px;
+    width: 75px;
+    height: 75px;
 }
 .input_player
 {
@@ -111,36 +113,54 @@ textarea
     color: rgb(123, 131, 126);
     font-family: monofonto, Arial;
 }
+.imagens_left
+{
+    position: relative;
+    width: 300%;
+    height: 10%;
+    margin: -7%;
+    left: 5%;
+}
 
 /*itens*/
-#leftdiv
+.leftdiv
 {
-    background: linear-gradient(rgb(39, 39, 39) 0%, black 110%);
+    background: linear-gradient(rgb(19, 19, 19) 0%, rgb(212, 120, 15) 100%);
     margin: -8px;
     border: 0px solid #C68400;
     position: fixed;
-    width: 35%;
+    width: 4.5%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     flex-direction: column;
     z-index: 10;
+    transition: background-color 2s;
 }
-#rightdiv
+.leftdiv.active
 {
-    background: linear-gradient(rgb(39, 39, 39) 0%, black 110%);
+    background: linear-gradient(rgb(240, 240, 240) 0%, rgb(212, 120, 15) 100%);
+}
+.rightdiv
+{
+    background: linear-gradient(rgb(24, 24, 24) 0%, rgb(212, 120, 15) 300%);
     margin: -8px;
     border: 0px solid #C68400;
     position: fixed;
-    left: 66%;
-    width: 35%;
+    left: 76%;
+    width: 25%;
     height: 100%;
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     z-index: 10;
+    transition: background-color 2s;
+}
+.rightdiv.active
+{
+    background: linear-gradient(rgb(241, 241, 241) 0%, rgb(212, 120, 15) 100%);
 }
 #ficha_div
 {
@@ -207,6 +227,7 @@ textarea
 }
 #prompt_BM
 {
+    margin: 20px;
     border-radius: 5px;
     border: 0 none;
     outline: 0;
@@ -218,12 +239,12 @@ textarea
 {
     width: 200px;
     height: 200px;
-    position: relative;
+    margin: 20px;
     top: -10%;
 }
 #objetos_right
 {
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     flex-direction: column;
@@ -233,7 +254,6 @@ textarea
 }
 #output_BM
 {
-    position: relative;
     overflow-y: visible;
     color: rgb(66, 66, 66);
     background-color: rgb(192, 192, 192);
@@ -273,8 +293,6 @@ textarea
 }
 #imagen_ficha
 {
-    width: 55%; 
-    height: 45%; 
     opacity: 0.9;
     position: static;
     margin-top: 9%;
@@ -305,4 +323,68 @@ textarea
 {
     text-align: center;
     margin-top: 10px;
+}
+#ficha_top_div
+{
+    display: flex;
+    flex-direction: column; 
+    justify-content: start; 
+    height: 60%; 
+}
+#ficha_bottom_div
+{
+    display: flex; 
+    flex-direction: column; 
+    height: 40%;
+}
+
+#btn_d_n
+{
+    width: 40px;
+    height:40px;
+    opacity: 0;
+    position: absolute;
+    z-index: 4;
+}
+#btn_d_nj
+{
+    width: 40px;
+    height:40px;
+    position: absolute;
+    opacity: 1;
+    z-index: 5;
+}
+
+.div_day
+{
+    position: fixed;
+    background-color: rgb(39, 39, 39);
+    top: 2%;
+    left: 95%;
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.div_day.active
+{
+    background-color: rgb(206, 206, 206);
+}
+#btn_btn_BM
+{
+    width: 40px;
+    height: 40px;
+}
+
+.styless
+{
+    position: relative;
+    height: 1px;
+    width: 40px;
+    background-color: #eec470;
+    margin: 0px;
+    top: 7%;
+}
+.styless.active
+{
+    background-color: #614409;
 }

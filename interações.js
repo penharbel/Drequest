@@ -1,4 +1,4 @@
-//variaveis de controle
+//variáveis de controle
 var controle = 35;
 var controleRight = 35;
 var controleRleft = 66;
@@ -12,80 +12,28 @@ var tamanho = new Array(50);
 var fichas = new Array();
 var Imagens = new Array();
 var proxValue = 0;
+var ponteiro = false;
+var exclusao = false;
+var dragmap = false;
+
+//extra codes
+document.getElementById("btn_d_nj").style.opacity = 1;
+
 
 //Tutorial BigMeow
 var TutorialBM = "-----Tutorial----- \n \n -----rolagens---- \n \n O sistema por enquanto tem 3 tipos de rolagem de dados: \n \n VANTAGEM: pega o maior valor \n \n DESVANTAGEM: pega o menor valor \n \n DANO: soma todos os valores \n \n -----PROMPT----- \n \n Temos 3 tipos de commandos (DANO, ROLAGEN, SOMA) \n \n DANO: 1d20, 4d12, 510 (não importa os valores se tiver um D no meio) \n \n ROLAGEM: dano, vantagem(vant), desvantagem(desv) \n \n SOMA: +5 +6 +7 \n \n PS: A ORDEM DOS VALORES NÃO ALTERA O RESULTADO, fique tranquilo para escrever {2d30 4d100 +5 +6 dano 2d13 +7} \n \n PS2: Cada commando tem que estar separado por ESPAÇO para serem reconhecidos \n \n PS3: O commando ROLAGENS é OBRIGATORIO!!! \n \n Obrigado, se divirta!!!"
 
 //animações
-    //div lateral esquerda(animação para retrair e abrir)
-        $("#leftdiv").mouseleave(() => {
-            if(document.getElementById("mudar_mapa").style.display == "flex" || document.getElementById("excluir_player").style.display == "flex" || document.getElementById("criar_player").style.display == "flex" || document.getElementById("perso_div").style.display == "flex" || document.getElementById("zoom_div").style.display == "flex" || document.getElementById("criar_player").style.display == "flex"){
-                return;
-            }
-            
-            function Anim()
-            {
-                if(controle < 2)
-                {
-                    controle = 3;
-                    return;
-                }
-                if(controle > 35)
-                {
-                    controle = 35;
-                    return;
-                }
-                if(controle < 35)
-                {
-                    document.getElementById("objetos_left").style.display = "none";
-                }else if(controle > 34){
-                    document.getElementById("objetos_left").style.display = "flex";
-                }
-                document.getElementById("leftdiv").style.width = controle + "%";
-                controle += Lx;
-                requestAnimationFrame(Anim);
-            }
-            Lx *= -1;
-            Anim();
-        });
-
-    //div lateral direita(animação para retrair e abrir)
-        $("#rightdiv").mouseleave(() => { 
-            function Anim()
-            {
-                if(controleRight < 2)
-                {
-                    controleRight = 3;
-                    controleRleft = 98;
-                    return;
-                }
-                if(controleRight > 35)
-                {
-                    controleRight = 35;
-                    controleRleft = 66;
-                    return;
-                }
-                if(controleRight < 34)
-                {
-                    document.getElementById("objetos_right").style.display = "none";
-                }else if(controleRight > 34){
-                    document.getElementById("objetos_right").style.display = "flex";
-                }
-                document.getElementById("rightdiv").style.width = controleRight + "%";
-                document.getElementById("rightdiv").style.left = controleRleft + "%";
-                controleRight += Rx;
-                controleRleft += (Rx * -1);
-                requestAnimationFrame(Anim);
-            }
-            Rx *= -1;
-            Anim();
-        });
 
 //mudança de estado
-function opcoestop(ret,col)
+function Transicao(ret,col)
 {
-    let sumir = document.getElementById(ret).style;
-    let aparecer = document.getElementById(col).style;
+    if(ret != ""){
+    var sumir = document.getElementById(ret).style;
+    }
+    if(col != ""){
+    var aparecer = document.getElementById(col).style;
+    }
     let controle = 1.0;
 
     function Anima()
@@ -115,12 +63,27 @@ function opcoestop(ret,col)
 }
     
 //jquery
+    //Alteração no método de ficha
+    window.addEventListener("keypress", (Even) => {
+        if(Even.keyCode == 47)
+        {
+            document.getElementById("ficha_bottom_div").style.display;
+        }
+    },false);
+
     //criação de players
-       $("#Cria_player").click(function () {
+    function Criacao_player(){
+
+        if(ponteiro == false)
+        {
+            return;
+        }
+        ponteiro = false;
+        document.getElementById("ponteiro").style.display = "none"
 
         //setando o prompt
-            let name = document.getElementById("Name_player").value;
-            let ficha = document.getElementById("ficha_player").value;
+            let name = "Personagem";
+            let ficha = "vida 50/50 \n stamina 100/100";
 
         //criando o player
             let container = document.querySelector("body")
@@ -165,7 +128,7 @@ function opcoestop(ret,col)
             container.appendChild(divP);
 
             rotate[playerid] = 0;
-            tamanho[playerid] = 150;
+            tamanho[playerid] = 76;
 
             //Setando as fichas e imagens (objetos)
                 fichas[divP.id] = {
@@ -306,69 +269,32 @@ function opcoestop(ret,col)
                     }
                 }
 
-            //Config da Ficha    
-                function FichaOpen()
+            //Excluir  
+                function excluir()
                 {
-                    let control = 0;
-                    let containerF = document.getElementById("ficha_div").style;
-                    let imgF = document.getElementById("imagen_ficha");
-                    let statF = document.getElementById("status_ficha");
-                    let nameF = document.getElementById("nome_ficha");
-                    let loreF = document.getElementById("lore_ficha");
-
-                    statF.height = 125 + "px";
-                    containerF.display = "flex";
-                    nameF.innerHTML = fichas[divP.id].nome;
-
-                    let val = fichas[divP.id].ficha.split("\n");
-                    val.forEach(Ele => {
-                        if(Ele.search("lore:") < 0)
-                        {
-                            statF.innerHTML += (Ele + "<br>");
-                        }else{
-                            loreF.innerHTML = Ele;
-                        }
-                    });
-
-                    imgF.src = Imagens[divP.id].img1;
-                    control = 0;
+                    window.removeEventListener("drag", excluir, false);
+                    window.removeEventListener("scroll", rotatingplayer, false);
+                    window.removeEventListener("keypress", making, false);
+                    if(exclusao == false)
+                    {
+                        return;
+                    }
+                    proxValue = playerid;
+                    playerid = divP.id;
+                    document.body.removeChild(divP);
+                    exclusao = false;
+                    document.getElementById("ponteiro").style.display = "none";
                 }
-                
-                function FichaClose()
-                {
-
-                    let containerF = document.getElementById("ficha_div").style;
-                    let imgF = document.getElementById("imagen_ficha");
-                    let statF = document.getElementById("status_ficha");
-                    let nameF = document.getElementById("nome_ficha");
-                    let loreF = document.getElementById("lore_ficha");
-
-                    containerF.display = "none";
-                    statF.innerHTML = "";
-                    nameF.innerHTML = "";
-                    loreF.innerHTML = "";
-                    imgF.src = ""; 
-
-                }
-
-
-                function FichaChange(e)
-                {
-                    let ficha = document.getElementById("id_play");
-                    ficha.value = ("Nome:" + fichas[divP.id].nome + "\n" + fichas[divP.id].ficha);
-                }
-
 
                 $("#" + divP.id).hover(() => {
                     lastscroll = window.scrollY;
                     window.addEventListener("scroll", rotatingplayer, false);
-                    window.addEventListener("keypress", making, false)
-                    FichaChange();
-                    FichaOpen();
+                    window.addEventListener("keypress", making, false);
+                    window.addEventListener("drag", excluir, false);
                 }, () => {
                     window.removeEventListener("scroll", rotatingplayer, false);
                     window.removeEventListener("keypress", making, false);
-                    FichaClose();
+                    window.removeEventListener("drag", excluir, false);
                     window.scroll(window.scrollX, lastscroll);
                 });
 
@@ -377,6 +303,16 @@ function opcoestop(ret,col)
                     divP.style.left = e.pageX - (tamanho[divP.id] / 2) + "px";
                     divP.style.top = e.pageY - (tamanho[divP.id] / 2) + "px";
                 }, false)
+            
+            //Sets finais
+            divP.style.top = (event.pageY - 37) + "px";
+            divP.style.left = (event.pageX - 37) + "px";
+            document.getElementById(imgP.id).style.width = tamanho[divP.id] + "px";
+            document.getElementById(divP.id).style.width = tamanho[divP.id] + "px";
+            document.getElementById(inputP.id).style.width = tamanho[divP.id] + "px";
+            document.getElementById(imgP.id).style.height = tamanho[divP.id] + "px";
+            document.getElementById(divP.id).style.height = tamanho[divP.id] + "px";
+            document.getElementById(inputP.id).style.height = tamanho[divP.id] + "px";
                 
                 
             if(proxValue == 0)
@@ -386,18 +322,49 @@ function opcoestop(ret,col)
                 playerid = proxValue;
                 proxValue = 0;
             }
-        });
-    
-    //excluir personagens
-        $("#player_ext").change(() => {
-            let valor = document.getElementById("player_ext").value;
-            let playerExt = document.getElementById("" + valor);
-            proxValue = playerid;
-            playerid = valor;
-            document.body.removeChild(playerExt);
-        });
+        };
+
+
+        $("#Cria_player").click(function (event) {
+            function movimento(event){
+            pont.left = event.clientX + "px";
+            pont.top = (event.clientY - 40) + "px";
+            };
+            document.getElementById("ponteiro").style.display = "block ";
+
+            let pont = document.getElementById("ponteiro").style;
+            pont.left = event.clientX + "px";
+            pont.top = (event.clientY - 40) + "px";
+
+            window.addEventListener("mousemove", movimento, false);
+
+            ponteiro = true;
+       });
+
+       $("#ext").click(() => {
+            exclusao = true;
+            function movimento(event){
+            pont.left = event.clientX + "px";
+            pont.top = (event.clientY - 40) + "px";
+            };
+            document.getElementById("ponteiro").style.display = "block ";
+
+            let pont = document.getElementById("ponteiro").style;
+            pont.left = event.clientX + "px";
+            pont.top = (event.clientY - 40) + "px";
+
+            window.addEventListener("mousemove", movimento, false);
+       });
 
     //mudança de mapa
+        $("#map_change").click(() => {
+            document.getElementById("rightdiv").style.display = "flex";
+            document.getElementById("mudar_mapa").style.display = "flex";
+        });
+        $("#return_1").click(() => {
+            document.getElementById("rightdiv").style.display = "none";
+            document.getElementById("mudar_mapa").style.display = "none";
+        });
         $("#maps").change(() => {
             let arquivo = document.getElementById("maps");
             let mapa = document.getElementById("mapa");
@@ -411,7 +378,9 @@ function opcoestop(ret,col)
         });
     
     //movimentação do mapa
-        $("#mapa").click(() => { window.scroll(event.clientX, event.clientY); });
+    //
+    //
+    //
     
     //aumento do personagem
         $("#btn_change").click(() => {
@@ -429,8 +398,59 @@ function opcoestop(ret,col)
            tamanho[id] = tamanhu / 2;
         });
 
-    //site para riar mapas2D
-        $("#maps_create").click(() => { window.open("https://inkarnate.com/", "_blank") });
+    //Dia e noite
+    $("#btn_d_nj").click(() => {
+        let claro = document.getElementById("btn_d_nj").style;
+        document.querySelector('.rightdiv').classList.toggle('active');
+        document.querySelector('.leftdiv').classList.toggle('active');
+        document.querySelector('.styless').classList.toggle('active');
+        if(claro.opacity < 0.5)
+        {
+            $("#btn_d_nj").animate({opacity: '1'}, "slow")
+            $("#btn_d_n").animate({opacity: '0'}, "slow")
+        }else{
+            $("#btn_d_nj").animate({opacity: '0'}, "slow")
+            $("#btn_d_n").animate({opacity: '1'}, "slow")
+        }
+        setTimeout(() => { document.querySelector('.div_day').classList.toggle('active'); }, 450)
+    });
+
+    //map vision
+    var Y = 0;
+    var X = 0;
+    function movemap()
+    {
+        function removedor()
+        {
+            window.removeEventListener("mousemove", movemap, false);
+            window.removeEventListener("click", removedor, false);
+        }   
+        if(dragmap == false)
+        {
+            dragmap = true;
+            document.getElementById("mapa").addEventListener("mousemove", movemap, false);
+            document.getElementById("mapa").addEventListener("click", removedor,false);
+            X = event.clientX;
+            Y = event.clientY;
+        }
+            let fY = event.clientY -= Y;
+            let fX = event.clientX -= X;
+            window.scroll(fX,fY); 
+    }
+
+    document.getElementById("mapa").addEventListener("click", movemap, false);
+
+    //big meow interface
+    $("#btn_btn_BM").click(() => {
+        document.getElementById("rightdiv").style.display = "block";
+        document.getElementById("objetos_right").style.display = "flex";
+    })
+
+    //return
+    $("#return_2").click(() => {
+        document.getElementById("rightdiv").style.display = "none";
+        document.getElementById("objetos_right").style.display = "none";
+    })
 
     //Sistema de dados
         $('#output_BM').attr("disabled", true);
@@ -660,4 +680,3 @@ function opcoestop(ret,col)
                 }
             });
         });
-        

@@ -11,69 +11,74 @@
 </head>
 <body >
 
-    <img style="position: absolute;" id="mapa" src="imagens/neon.hpg.jpg" alt="sdasda">
+    <img draggable="true" style="position: absolute; " id="mapa" src="imagens/mapa.jpeg" alt="sdasda" onclick="Criacao_player()">
 
-    <div id="leftdiv">
-        <div id="objetos_left">
-            <h1 id="h1_mestre" style="position: relative; margin-bottom: 50px; color: #f1f1f1;">Opções do <span id="player">mestre</span></h1>
-            <button id="edit_btn1" onclick="opcoestop('objetos_left', 'criar_player')">Criar personagem</button>
-            <button id="edit_btn2" onclick="opcoestop('objetos_left', 'excluir_player')">Excluir personagem</button>
-            <button id="edit_btn4" onclick="opcoestop('objetos_left', 'mudar_mapa')" >mudar mapa</button>
-            <button id="edit_btn5" style="color: rgb(141, 4, 4);">banir player</button>
-            <button class="button_ex1" onclick="opcoestop('objetos_left', 'zoom_div')">Mapa ajustes</button>
-            <button class="button_ex1" onclick="opcoestop('objetos_left', 'perso_div')">Alterar Player </button>
-            <button class="button_ex1" id="maps_create">Criação de mapas</button>
-        </div>
-        <div id="criar_player">
-            <h3>Nome</h3>
-            <textarea name="nome" id="Name_player" cols="30" rows="1" ></textarea>
-            <h3>Ficha</h3>
-            <textarea name="nome" id="ficha_player" cols="38" rows="40" > Exemplo &#10; vida:78 // Stamina:34 &#10; Intelecto:0 // força:5 &#10; destreza:0 &#10; foco:0 &#10; lore:jax é um mecânico extremamente habilidoso e a pesar dos pesares segue com seus cosplays incríveis</textarea>
-            <button class="button_ex2" onclick="opcoestop('criar_player', 'objetos_left')" id="Cria_player">&lt;</button>
-        </div>
+    <div class="leftdiv" id="leftdiv">
+
+        <img src="imagens/informação_amarelo.png" alt="config" title="config" class="imagens_left" style="left: 1%; top: 5%; width: 60%; height: 4%;">
+        <img src="imagens/ponteiro.png" alt="" id="ponteiro" style="display: none; position: absolute; width: 50px; height: 40px; z-index: 1;">
+        <img src="imagens/criar_player.png" class="imagens_left" style="margin-top: 100%;" alt="Criar Player-Image" title="Criar Player" id="Cria_player">
+        <img src="imagens/excluir_personagem.png" id="ext" class="imagens_left" alt="Excluir Player-Image" title="Excluir player" style="left: -15%;">
+        <img src="imagens/mudar mapa.png" id="map_change" class="imagens_left" alt="Mudar Mapa-Image" title="Mudar mapa" style="left: 1%; top: 5%; width: 80%; height: 5%;">
+        <br>
+        <div class="styless"></div>
+        <img src="imagens/mouse.png" alt="mover_mapa" title="Mover mapa" class="imagens_left" style="left: 1%; top: 7%; width: 68%; height: 4%; margin: 10px;">
+
+    </div>
+
+    
+    <div class="div_day">
+        <img id="btn_d_n" src="imagens/sol_escuro.png" alt="sun" title="Dia-Noite">
+        <img id="btn_d_nj" src="imagens/sol_claro.png" alt="sun" title="Dia-Noite">
+    </div>
+
+    <div class="div_day" style="top: 10%;">
+        <img id="btn_btn_BM" src="imagens/gato.png" alt="meow" title="Bot">
+    </div>
+
+
+    <div class="rightdiv" id="rightdiv">
+
         <div id="mudar_mapa">
             <h1 style="text-align: center;">Clique ou arraste seus arquivos</h1>
             <input type="file" name="mapas" id="maps">
-            <button class="button_ex2" onclick="opcoestop('mudar_mapa', 'objetos_left')">&lt;</button>
+            <button class="button_ex2" id="return_1">&lt;</button>
         </div>
-        <div id="excluir_player">
-            <h1 style="text-align: center;">quem voce deseja excluir?</h1>
-            <textarea style="resize: none;" name="player" id="player_ext" cols="25" rows="1">valor em numeros: 1</textarea>
-            <button class="button_ex2" onclick="opcoestop('excluir_player', 'objetos_left')">&lt;</button>
-        </div>
-        <div style="display: none;" id="perso_div">
-            <h1>Altere sua ficha</h1>
-            <textarea name="player tamanho" id="id_play" cols="40" rows="35"></textarea>
-            <button class="button_ex2" onclick="opcoestop('perso_div','objetos_left')">&lt;</button>
-        </div>
-        <div style="display: none;" id="zoom_div">
-            <h1>Tamanho do mapa</h1>
-            <textarea style="resize: none; text-align: center;" name="zoom" id="T_zoom" cols="30" rows="2">2000</textarea>
-            <button class="button_ex2" onclick="opcoestop('zoom_div','objetos_left')">&lt;</button>
-        </div>
-    </div>
 
-
-
-    <div id="rightdiv">
         <div id="objetos_right">
             <img src="imagens/gato gordo.jpg" alt="Big Meow" id="Big_Meow">
-            <textarea id="output_BM" name="output_BM" cols="32" rows="27">Digite: tutorial</textarea>
+            <textarea id="output_BM" name="output_BM" cols="32" rows="24">Digite: tutorial</textarea>
             <textarea onkeypress="enterprompt(event)" name="input" id="prompt_BM" cols="30" rows="1"></textarea>
+            <button class="button_ex2" id="return_2">&lt;</button>
         </div>
+
     </div>
 
-    <div id="ficha_div" style="display: none;">
-        <div style="display: flex; flex-direction: column; justify-content: start; height: 60%; ">
-            <img src="imagens/rei_veio.jpg" alt="" id="imagen_ficha">
-            <h1 id="nome_ficha">Jorge</h1>
-            <p id="status_ficha" class="paragrafo_ficha"></p>
-        </div>
-        <div style="display: flex; flex-direction: column; height: 40%;">
-            <h1>Lore</h1>
-            <p id="lore_ficha">odoiadjoiasdjaoijdaowidiwaj</p>
-        </div>
+    <!-- 
+        <div id="criar_player">
+        <h3>Nome</h3>
+        <textarea name="nome" id="Name_player" cols="30" rows="1" ></textarea>
+        <h3>Ficha</h3>
+        <textarea name="nome" id="ficha_player" cols="38" rows="40" > Exemplo &#10; vida:78 // Stamina:34 &#10; Intelecto:0 // força:5 &#10; destreza:0 &#10; foco:0 &#10; lore:jax é um mecânico extremamente habilidoso e a pesar dos pesares segue com seus cosplays incríveis</textarea>
+        <button class="button_ex2" onclick="opcoestop('criar_player', 'objetos_left')" id="Cria_player">&lt;</button>
     </div>
- 
+    
+    <div id="excluir_player">
+        <h1 style="text-align: center;">quem voce deseja excluir?</h1>
+        <textarea style="resize: none;" name="player" id="player_ext" cols="25" rows="1">valor em numeros: 1</textarea>
+        <button class="button_ex2" onclick="opcoestop('excluir_player', 'objetos_left')">&lt;</button>
+    </div>
+    <div style="display: none;" id="perso_div">
+        <h1>Altere sua ficha</h1>
+        <textarea name="player tamanho" id="id_play" cols="40" rows="35"></textarea>
+        <button class="button_ex2" onclick="opcoestop('perso_div','objetos_left')">&lt;</button>
+    </div>
+    <div style="display: none;" id="zoom_div">
+        <h1>Tamanho do mapa</h1>
+        <textarea style="resize: none; text-align: center;" name="zoom" id="T_zoom" cols="30" rows="2">2000</textarea>
+        <button class="button_ex2" onclick="opcoestop('zoom_div','objetos_left')">&lt;</button>
+    </div> 
+    --->
 </body>
 </html>
+
