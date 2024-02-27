@@ -1,3 +1,5 @@
+const { Draggable } = require("@shopify/draggable/lib/es5/draggable.bundle.legacy");
+
 //variáveis de controle
 var controle = 35;
 var controleRight = 35;
@@ -16,8 +18,11 @@ var ponteiro = false;
 var exclusao = false;
 var dragmap = false;
 
+
+
 //extra codes
 document.getElementById("btn_d_nj").style.opacity = 1;
+
 
 
 //Tutorial BigMeow
@@ -416,30 +421,46 @@ function Transicao(ret,col)
     });
 
     //map vision
-    var Y = 0;
-    var X = 0;
-    function movemap()
+    var Xn = 0;
+    var Yn = 0;
+
+    var action = false;
+
+    function moveInit(e)
     {
-        function removedor()
+        if(action == true)
         {
-            window.removeEventListener("mousemove", movemap, false);
-            window.removeEventListener("click", removedor, false);
-        }   
-        if(dragmap == false)
-        {
-            dragmap = true;
+            action = false;
             document.getElementById("mapa").addEventListener("mousemove", movemap, false);
-            document.getElementById("mapa").addEventListener("click", removedor,false);
-            X = event.clientX;
-            Y = event.clientY;
+            Yn = e.clientY += scrollY;
+            Xn = e.clientX += scrollX;
+
+        }else if(action == false)
+        {
+            document.getElementById("mapa").removeEventListener("mousemove", movemap, false);
         }
-            let fY = event.clientY -= Y;
-            let fX = event.clientX -= X;
-            window.scroll(fX,fY); 
+        
+        
     }
+    function movemap(e)
+    {
 
-    document.getElementById("mapa").addEventListener("click", movemap, false);
-
+        scroll(Xn - e.clientX, Yn - e.clientY);
+    }
+    $("#moveM").click(() => {
+        if(action == false)
+        {
+            action = true;
+            document.getElementById("mapa").addEventListener("click", moveInit, false); 
+        }else if(action == true)
+        {
+            action = false;
+            document.getElementById("mapa").removeEventListener("mousemove", movemap, false);
+            document.getElementById("mapa").removeEventListener("click", moveInit, false); 
+        }   
+    });
+    
+    
     //big meow interface
     $("#btn_btn_BM").click(() => {
         document.getElementById("rightdiv").style.display = "block";

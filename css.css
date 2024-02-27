@@ -17,7 +17,6 @@ body
     background-color: rgb(53, 53, 50);
     width: 1500;
     height: 1500;
-
 }
 button
 {
@@ -38,7 +37,7 @@ h1
     font-family: front, Arial;
     font-size: 40px;
     font-weight: 300;
-    color: #000000;
+    color: #c7c7c7;
 }
 h3
 {
