@@ -1,13 +1,5 @@
-const { Draggable } = require("@shopify/draggable/lib/es5/draggable.bundle.legacy");
-
 //variáveis de controle
-var controle = 35;
-var controleRight = 35;
-var controleRleft = 66;
 var lastscroll = 0;
-var Lx = 1;
-var Tx = 1;
-var Rx = 1;
 var playerid = 1;
 var rotate = new Array(50);
 var tamanho = new Array(50);
@@ -444,7 +436,6 @@ function Transicao(ret,col)
     }
     function movemap(e)
     {
-
         scroll(Xn - e.clientX, Yn - e.clientY);
     }
     $("#moveM").click(() => {
